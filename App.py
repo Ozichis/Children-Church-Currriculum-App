@@ -366,9 +366,9 @@ class CurriculumPage(QDialog):
         self.WebBrowser.setFixedSize(354, 591)
         # convert system path to web path
         if age >= 3 and age < 6:
-            f = Path("C:\\Users\\HP\\Downloads\\Telegram Desktop\\lcbcforpresc_jul_2160df2e79b992b.pdf").as_uri()
+            f = Path("lcbcforpresc_jul_2160df2e79b992b.pdf").as_uri()
         else:
-            f = Path("C:\\Users\\HP\\Downloads\\Telegram Desktop\\lcbcforupper_jul_2160df2ecaed84c.pdf").as_uri()
+            f = Path("lcbcforupper_jul_2160df2ecaed84c.pdf").as_uri()
         # load object
         self.WebBrowser.dynamicCall('Navigate(const QString&)', f)
 
