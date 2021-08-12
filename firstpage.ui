@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>379</width>
+    <height>602</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>521</width>
+     <height>601</height>
+    </rect>
+   </property>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>20</y>
+      <width>151</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 18pt &quot;MS Shell Dlg 2&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Welcome!</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>80</y>
+      <width>381</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 18pt &quot;MS Shell Dlg 2&quot;;
+background-color: rgb(11, 190, 255);</string>
+    </property>
+    <property name="text">
+     <string>                   I AM A</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="teacher">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>190</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    color: #333;
+	font: 18pt ''MS Shell Dlg 2'';
+    border: 2px solid #555;
+    border-radius: 20px;
+    border-style: outset;
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 orange, stop: 1 orange
+        );
+    padding: 5px;
+    }
+
+QPushButton:hover {
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+        );
+    }
+
+QPushButton:pressed {
+    border-style: inset;
+    background: qradialgradient(
+        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+        );
+    }</string>
+    </property>
+    <property name="text">
+     <string>Teacher</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="child">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>190</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    color: #333;
+	font: 18pt ''MS Shell Dlg 2'';
+    border: 2px solid #555;
+    border-radius: 20px;
+    border-style: outset;
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 orange, stop: 1 orange
+        );
+    padding: 5px;
+    }
+
+QPushButton:hover {
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+        );
+    }
+
+QPushButton:pressed {
+    border-style: inset;
+    background: qradialgradient(
+        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+        );
+    }</string>
+    </property>
+    <property name="text">
+     <string>Child</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>290</y>
+      <width>381</width>
+      <height>311</height>
+     </rect>
+    </property>
+    <property name="sizeIncrement">
+     <size>
+      <width>90</width>
+      <height>80</height>
+     </size>
+    </property>
+    <property name="baseSize">
+     <size>
+      <width>100</width>
+      <height>200</height>
+     </size>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="resource.qrc">:/newPrefix/OneDrive/Desktop/beginning.png</pixmap>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>359</width>
+    <height>599</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>381</width>
+     <height>601</height>
+    </rect>
+   </property>
+   <property name="statusTip">
+    <string/>
+   </property>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>60</y>
+      <width>371</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 23pt &quot;MS Shell Dlg 2&quot;;
+background-image: url(:/newPrefix/OneDrive/Desktop/Children Church App Pics/Welcome Teacher Page.png);
+color: white;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>-10</y>
+      <width>361</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 18pt &quot;MS Shell Dlg 2&quot;;
+background-color: #25dcff;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>               Welcome
+          [Teacher Name]</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>250</y>
+      <width>351</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    color: #333;
+	font: 18pt ''MS Shell Dlg 2'';
+    border: 2px solid #555;
+    border-radius: 10px;
+    border-style: outset;
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 orange, stop: 1 orange
+        );
+    padding: 5px;
+    }
+
+QPushButton:hover {
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+        );
+    }
+
+QPushButton:pressed {
+    border-style: inset;
+    background: qradialgradient(
+        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+        );
+    }</string>
+    </property>
+    <property name="text">
+     <string>View Class Kids</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>310</y>
+      <width>351</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    color: #333;
+	font: 18pt ''MS Shell Dlg 2'';
+    border: 2px solid #555;
+    border-radius: 10px;
+    border-style: outset;
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 orange, stop: 1 orange
+        );
+    padding: 5px;
+    }
+
+QPushButton:hover {
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+        );
+    }
+
+QPushButton:pressed {
+    border-style: inset;
+    background: qradialgradient(
+        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+        );
+    }</string>
+    </property>
+    <property name="text">
+     <string>Register a child</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>370</y>
+      <width>351</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    color: #333;
+	font: 18pt ''MS Shell Dlg 2'';
+    border: 2px solid #555;
+    border-radius: 10px;
+    border-style: outset;
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 orange, stop: 1 orange
+        );
+    padding: 5px;
+    }
+
+QPushButton:hover {
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+        );
+    }
+
+QPushButton:pressed {
+    border-style: inset;
+    background: qradialgradient(
+        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+        );
+    }</string>
+    </property>
+    <property name="text">
+     <string>View Curriculum</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_6">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>430</y>
+      <width>351</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    color: #333;
+	font: 18pt ''MS Shell Dlg 2'';
+    border: 2px solid #555;
+    border-radius: 10px;
+    border-style: outset;
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 orange, stop: 1 orange
+        );
+    padding: 5px;
+    }
+
+QPushButton:hover {
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+        );
+    }
+
+QPushButton:pressed {
+    border-style: inset;
+    background: qradialgradient(
+        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+        );
+    }</string>
+    </property>
+    <property name="text">
+     <string>View Assignments</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="reports">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>490</y>
+      <width>351</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    color: #333;
+	font: 18pt ''MS Shell Dlg 2'';
+    border: 2px solid #555;
+    border-radius: 10px;
+    border-style: outset;
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 orange, stop: 1 orange
+        );
+    padding: 5px;
+    }
+
+QPushButton:hover {
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+        );
+    }
+
+QPushButton:pressed {
+    border-style: inset;
+    background: qradialgradient(
+        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+        );
+    }</string>
+    </property>
+    <property name="text">
+     <string>Reports</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>570</y>
+      <width>141</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Copyright 2021 @ Edition</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>560</y>
+      <width>361</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

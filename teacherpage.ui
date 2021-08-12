@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>359</width>
+    <height>599</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>381</width>
+     <height>601</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/newPrefix/Downloads/Telegram Desktop/photo_2021-08-09_21-06-21.jpg);</string>
+   </property>
+   <widget class="QCheckBox" name="checkBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>370</y>
+      <width>171</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 0, 255);</string>
+    </property>
+    <property name="text">
+     <string>Remember Me</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>410</y>
+      <width>381</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 0, 255);</string>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="forgotmenu">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>380</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;
+border-color: rgb(255, 255, 255);
+background-color: white;</string>
+    </property>
+    <property name="text">
+     <string>Forgot Password</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="signin">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>480</y>
+      <width>351</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    color: #333;
+	font: 18pt ''MS Shell Dlg 2'';
+    border: 2px solid #555;
+    border-radius: 10px;
+    border-style: outset;
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 orange, stop: 1 orange
+        );
+    padding: 5px;
+    }
+
+QPushButton:hover {
+    background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+        );
+    }
+
+QPushButton:pressed {
+    border-style: inset;
+    background: qradialgradient(
+        cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1,
+        radius: 1.35, stop: 0 #fff, stop: 1 #ddd
+        );
+    }</string>
+    </property>
+    <property name="text">
+     <string>Sign In</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="password">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>290</y>
+      <width>321</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 white, stop: 1 white
+        );
+border-radius: 10px;
+color: blue;</string>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
+    <property name="placeholderText">
+     <string>Password</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="username">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>210</y>
+      <width>321</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0 white, stop: 1 white
+        );
+border-radius: 10px;
+color: blue;</string>
+    </property>
+    <property name="placeholderText">
+     <string>Username</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="usererror">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>190</y>
+      <width>311</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: red;
+background-color: rgb(255,255,255);
+font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="passworderror">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>270</y>
+      <width>311</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: red;
+background-color: rgb(255,255,255);
+font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>
