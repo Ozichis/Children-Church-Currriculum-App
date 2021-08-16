@@ -1,10 +1,11 @@
 import datetime, os
+import sqlite3
 from pathlib import Path
 
 import pyttsx3
 from PyQt5 import QAxContainer
 from PyQt5.QtWidgets import QApplication, QLabel, QDialog, QStackedWidget, QInputDialog, QLineEdit, QMessageBox, \
-    QCommandLinkButton, QProgressBar
+    QCommandLinkButton, QProgressBar, QWidget, QScrollArea
 from PyQt5.QtGui import QPixmap, QIntValidator
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import Qt, QDate, QTimer
@@ -48,18 +49,17 @@ class TeacherPage(QDialog):
     def forgotstatus(self):
         codec, done1 = QInputDialog.getText(self, "Email", "Please enter your email:")
 
-        file = xl.load_workbook("teachers.xlsx")
-        sheet = file['Sheet1']
-        apk = 2
         corr = False
-        while not corr:
-            if sheet['A'+str(apk)].value == None:
+        data = {}
+        conn = sqlite3.connect("teachers.db")
+        cursor = conn.execute("SELECT TeacherName, Teacherid, TeachersChurch, TeachersZone, Gender, Birthday, CertificateStatus, Country, PhoneNo, Email, Password, State from teachers")
+        for row in cursor:
+            if row[9] == codec:
+                data = {'name': row[0], 'id': row[1], 'church': row[2], 'zone': row[3], 'gender': row[4], 'birthday': row[5], 'status-of-certificate': row[6], 'country': row[7], 'phone': row[8], 'email': row[9], 'password': row[10], 'state': row[11]}
+                corr = True
                 break
             else:
-                if sheet['J'+str(apk)].value == str(codec):
-                    corr = True
-                else:
-                    apk += 1
+                pass
         if not corr:
             QMessageBox.about(self, 'Error', "Oops! It look like your email doesn't exist in our database.")
         else:
@@ -73,7 +73,7 @@ class TeacherPage(QDialog):
                 message = f"""\
                                                 Subject: Verification\n
 
-                                                Hi, {sheet['A'+str(apk)].value}. You clicked the option for Forgot Password.
+                                                Hi, {data['name']}. You clicked the option for Forgot Password.
                                                 Verification code: {self.secret_number}
                                                 Type this verification code in the GenChamps app"""
 
@@ -93,45 +93,38 @@ class TeacherPage(QDialog):
                              if n:
                                  if confirm == new_pass:
                                      QMessageBox.about(self, 'Saved!', "Your password has been changed")
-                                     sheet['K'+str(apk)] = str(confirm)
-                                     file.save("C:\\Users\\HP\\PycharmProjects\\untitled\\GenChamps\\teachers.xlsx")
+                                     cursor.execute(f'Update teachers set Password = {confirm} where UserName = {data["name"]}')
+                                     conn.commit()
+                                     cursor.close()
                                  else:
                                      QMessageBox.about(self, 'Oops!', "You didn't type in the same password as you did before.\n\nBut don't worry, You can always use the 'Forgot Password' Option and we will get back to you.")
-                     self.associate_teacher(sheet['A'+str(apk)].value)
+                     self.associate_teacher(data['name'], data['country'], data['state'], data['church'], data['zone'])
             except:
                 QMessageBox.about(self, "Oops", "It looks like you do not have an internet connection")
 
     def signindata(self):
-        file = xl.load_workbook("teachers.xlsx")
-        sheet = file['Sheet1']
+        conn = sqlite3.connect("teachers.db")
+        cursor = conn.execute("SELECT TeacherName, Teacherid, TeachersChurch, TeachersZone, Gender, Birthday, CertificateStatus, Country, PhoneNo, Email, Password, State from teachers")
         chosen = False
-        operk = 2
         data = {}
-        users = []
-        passwords = []
-        point = 0
-        while not chosen:
-            if sheet['A'+str(operk)].value == None:
+        username = self.username.text()
+        password = self.password.text()
+        for row in cursor:
+            if row[0] == username:
+                data = {'name': row[0], 'id': row[1], 'church': row[2], 'zone': row[3], 'gender': row[4], 'birthday': row[5], 'status-of-certificate': row[6], 'country': row[7], 'phone': row[8], 'email': row[9], 'password': row[10], 'state': row[11]}
+                chosen = True
                 break
             else:
-                if sheet['A'+str(operk)].value == self.username.text():
-                    chosen = True
-                else:
-                    operk += 1
+                pass
         if not chosen:
             self.usererror.setText("The username you typed below does not exist")
             self.passworderror.setText("")
         else:
-            for i in range(operk+1):
-                users.append(sheet['A'+str(i+1)].value)
-                passwords.append(sheet['K'+str(i+1)].value)
-            for i in range(len(users)+1):
-                data[users[i-1]] = passwords[i-1]
-            if data[self.username.text()] != self.password.text():
+            if data['password'] != password:
                 self.usererror.setText("")
                 self.passworderror.setText("The password you typed in is incorrect")
             else:
-                self.associate_teacher(self.username.text(), sheet['H'+str(operk)].value, sheet['L'+str(operk)].value, sheet['C'+str(operk)].value, sheet['D'+str(operk)].value)
+                self.associate_teacher(data['name'], data['country'], data['state'], data['church'], data['zone'])
 
     def associate_teacher(self, names, country, state, church, zone):
         window8.new_name = names
@@ -240,39 +233,13 @@ class RegisterChild(QDialog):
                             elif self.birth_date_2 <= 12 and self.birth_date_2 > 9:
                                 col = 'Preteens'
                             data = {"name":self.child_nam, "password":self.passcode, "phone":self.phone_no, "email":self.emails, "teacher":self.new_name, 'classe':col, 'birth_date':f'{self.birth_date.year()}/{self.birth_date.month()}/{self.birth_date.day()}', 'acc_type':'CE Account', 'country':self.country, 'state':self.state, 'church':self.church, 'zone':self.zone, 'parent_name':self.parent_nam}
-                            file = xl.load_workbook("children.xlsx")
-                            sheet = file['Sheet1']
-                            op = 2
-                            conn = False
-                            while not conn:
-                                if sheet['A'+str(op)].value != None:
-                                    op += 1
-                                else:
-                                    sheet['A'+str(op)].value = data['name']
-                                    sheet['B'+str(op)].value = data['password']
-                                    sheet['C'+str(op)].value = data['phone']
-                                    sheet['D'+str(op)].value = data['email']
-                                    sheet['E'+str(op)].value = data['teacher']
-                                    sheet['F'+str(op)].value = data['classe']
-                                    sheet['G'+str(op)].value = data['birth_date']
-                                    sheet['H'+str(op)].value = data['acc_type']
-                                    sheet['I'+str(op)].value = data['country']
-                                    sheet['J'+str(op)].value = data['state']
-                                    sheet['K'+str(op)].value = data['church']
-                                    sheet['L'+str(op)].value = data['zone']
-                                    sheet['M'+str(op)].value = data['parent_name']
-                                    # alpha = string.ascii_uppercase
-                                    # alpha = list(alpha)
-                                    # k = []
-                                    # for i in range(len(alpha)+1):
-                                    #     if i < 14:
-                                    #         k.append(alpha[i])
-                                    #     else:
-                                    #         break
-                                    # for i2 in data.values():
-                                    #     sheet[i+str(op)] = i2
-                                    file.save(f"C:\\Users\\HP\\PycharmProjects\\untitled\\GenChamps\\children.xlsx")
-
+                            conn = sqlite3.connect("children.db")
+                            cursor = conn.execute(f"""INSERT INTO children
+                                                     (UserName, Password, PhoneNumber, Email, Teacher, Class, BirthDate, AccountType, Country, State, Church, Zone, ParentName, Coins)
+                                                      VALUES
+                                                      ('{data['name']}', '{data['password']}', '{data['phone']}', '{data['email']}', '{data['teacher']}', '{data['classe']}', '{data['birth_date']}', '{data['acc_type']}', '{data['country']}', '{data['state']}', '{data['church']}', '{data['zone']}', '{data['parent_name']}', 0)""")
+                            conn.commit()
+                            cursor.close()
 class AssociateTeacher(QDialog):
     def __init__(self, new_name, country, state, church, zone):
         super(AssociateTeacher, self).__init__()
@@ -286,6 +253,30 @@ class AssociateTeacher(QDialog):
         self.label_2.setText(self.label_2.text().replace('[Teacher Name]', str(self.new_name)))
         self.registration.clicked.connect(self.register)
         self.child_curriculum.clicked.connect(self.show_curriculum)
+        self.class_kids.clicked.connect(lambda: self.get_class_kids(new_name))
+
+    def get_class_kids(self, name):
+        w3 = ClassKids(name)
+        window2.addWidget(w3)
+        window2.setCurrentIndex(window2.currentIndex()+1)
+
+    def get_teacher_children(self, name):
+        try:
+            conn = sqlite3.connect("children.db")
+            cursor = conn.execute("SELECT UserName, Password, PhoneNumber, Email, Teacher, Class, BirthDate, AccountType, Country, State, Church, Zone, ParentName, Coins from children")
+            data = {}
+            conn = False
+            for row in cursor:
+                if row[4] == name:
+                    child_name = row[0]
+                    data[child_name] = {'name': child_name, 'phone': row[2],
+                                        'email': row[3], 'class': row[5],
+                                        'birth_date': row[6],
+                                        'parent_name': row[12],
+                                        'coins_made': row[13]}
+            return data
+        except Exception as e:
+            print(e)
 
     def show_curriculum(self):
         w2 = Curriculums()
@@ -296,6 +287,47 @@ class AssociateTeacher(QDialog):
         w = RegisterChild(self.new_name, self.country, self.state, self.church, self.zone)
         window2.addWidget(w)
         window2.setCurrentIndex(window2.currentIndex()+1)
+
+class ClassKids(QDialog):
+    def __init__(self, teacher_name):
+        super(ClassKids, self).__init__()
+        loadUi("children.ui", self)
+        self.teacher_name = teacher_name
+        objects = self.get_teacher_children(self.teacher_name)
+        text = 'Your Children:\n'
+        for i in objects.values():
+            text += f""""
+            Child Name: {i['name']}
+    Parent's Name: {i['parent_name']}
+    Parent's Phone Number: {i['phone']}
+    Parent's Email: {i['email']}
+    Child Class: {i['class']}
+    Child Birth Date: {i['birth_date']}
+    Coins Made: {i['coins_made']}\n
+    """
+        self.label_2.setText(text)
+
+
+
+    def get_teacher_children(self, name):
+        try:
+            conn = sqlite3.connect("children.db")
+            cursor = conn.execute(
+                "SELECT UserName, Password, PhoneNumber, Email, Teacher, Class, BirthDate, AccountType, Country, State, Church, Zone, ParentName, Coins from children")
+            data = {}
+            conn = False
+            for row in cursor:
+                if row[4] == name:
+                    child_name = row[0]
+                    data[child_name] = {'name': child_name, 'phone': row[2],
+                                        'email': row[3], 'class': row[5],
+                                        'birth_date': row[6],
+                                        'parent_name': row[12],
+                                        'coins_made': row[13]}
+            return data
+        except Exception as e:
+            print(e)
+
 
 class Curriculums(QDialog):
     def __init__(self):
@@ -355,16 +387,17 @@ class ChildPage(QDialog):
 
     def resolve(self):
         email, entered = QInputDialog.getText(self, 'Forgot Password', 'Please enter your email:')
-        file = xl.load_workbook("children.xlsx")
-        sheet = file['Sheet1']
+        conn = sqlite3.connect("children.db")
+        cursor = conn.execute("SELECT UserName, Password, PhoneNumber, Email, Teacher, Class, BirthDate, AccountType, Country, State, Church, Zone, ParentName, Coins from children")
         chosen = False
-        operance = 2
-        while not chosen:
-            if sheet['D'+str(operance)].value == str(email):
-                self.user = sheet['A'+str(operance)].value
+        data = {}
+        for row in cursor:
+            if row[3] == email:
+                data = {'name': row[0], 'password':row[1], 'phone':row[2], 'email':row[3], 'teacher':row[4], 'class':row[5], 'birth':row[6], 'acc_type':row[7], 'country':row[8], 'state':row[9], 'church':row[10], 'zone':row[11], 'parent-name': row[12], 'coins': row[13]}
                 chosen = True
+                break
             else:
-                operance += 1
+                pass
 
         if chosen:
             try:
@@ -396,13 +429,14 @@ class ChildPage(QDialog):
                             nexter, k = QInputDialog.getText(self, "Confirmation", "Please confirm your password", QLineEdit.Password)
                             if k:
                                 if str(nexter) == str(new_pass):
-                                    sheet['B'+str(operance)] = str(nexter)
-                                    file.save("C:\\Users\\HP\\PycharmProjects\\untitled\\GenChamps\\children.xlsx")
+                                    conn.execute(f"Update children set Password = {new_pass} where UserName = {data['name']}")
+                                    conn.commit()
+                                    cursor.close()
                                 else:
                                     QMessageBox.about(self, "Error", "You didn't type in the same password but don't worry you can still use the 'Forgot Password' option to get into your account")
 
                         self.errors.setText("")
-                        self.welcomeuser(self.user, sheet['B'+str(operance)].value, sheet['C'+str(operance)].value, sheet['D'+str(operance)].value, sheet['E'+str(operance)].value, sheet['F'+str(operance)].value, sheet['G'+str(operance)].value, sheet['H'+str(operance)].value, sheet['I'+str(operance)].value, sheet['J'+str(operance)].value, sheet['K'+str(operance)].value, sheet['L'+str(operance)].value, sheet['M'+str(operance)].value)
+                        self.welcomeuser(data['name'], data['password'], data['phone'], data['email'], data['teacher'], data['class'], data['birth'], data['acc_type'], data['country'], data['state'], data['church'], data['zone'])
             except:
                 QMessageBox.about(self, "Oops!", "It look like you do not have an internet connection")
 
@@ -516,6 +550,7 @@ class WelcomeUser(QDialog):
         self.label.setText(f"Welcome {name}")
         self.gamesfun.clicked.connect(lambda: self.loadgames(name=name))
         self.curriclum.clicked.connect(self.loadcurriculum)
+
     def compile_age(self, birth_date):
         listed = str(birth_date).split('/')
         print(listed)
@@ -617,19 +652,16 @@ class GamesPage(QDialog):
                     file.write('0')
                     file.close()
 
-                    filek = xl.load_workbook("children.xlsx")
-                    sheet = filek['Sheet1']
-                    conn = False
-                    op = 2
-                    while not conn:
-                        if sheet['A'+str(op)].value == self.name:
-                            sheet['N'+str(op)] = str(int(sheet['N'+str(op)].value)+1000000)
-                            conn = True
+                    conn = sqlite3.connect("children.db")
+                    cursor = conn.execute("SELECT UserName, Coins from children")
+                    for row in cursor:
+                        if row[0] == self.name:
+                            conn.execute(f"Update children set Coins = {int(row[1])+1000000} where UserName = {row[0]}")
+                            conn.commit()
+                            cursor.close()
+                            break
                         else:
-                            op += 1
-
-                    filek.save('C:\\Users\\HP\\PycharmProjects\\untitled\\GenChamps\\children.xlsx')
-
+                            pass
 
                     w = CongratulatePoints('1000000')
                     window2.addWidget(w)
@@ -811,30 +843,13 @@ class ChildPage2(QDialog):
                             self.errors.setText("Please enter a valid phone number")
                         else:
                             op = 2
-                            file = xl.load_workbook("children.xlsx")
-                            sheet = file['Sheet1']
-                            saved = False
-                            while not saved:
-                                if sheet['A'+str(op)].value != None:
-                                    op += 1
-                                else:
-                                    sheet['A'+str(op)] = self.fullnames
-                                    sheet['B'+str(op)] = self.passwords
-                                    sheet['C'+str(op)] = self.phones
-                                    sheet['D'+str(op)] = self.emails
-                                    sheet['E'+str(op)] = "None"
-                                    sheet['F'+str(op)] = "None"
-                                    sheet['G'+str(op)] = f"{self.dateEdit.date().year()}/{self.dateEdit.date().month()}/{self.dateEdit.date().day()}"
-                                    sheet['H'+str(op)] = "Outreach Account"
-                                    sheet['I'+str(op)] = self.countrsy
-                                    sheet['J'+str(op)] = self.anti_deep_states
-                                    sheet['K'+str(op)] = "None"
-                                    sheet['L'+str(op)] = "None"
-                                    sheet['M'+str(op)] = self.parent_names
-                                    file.save(f"{os.getcwd()}\children.xlsx")
-
-
-                                    #sheet[]
+                            conn = sqlite3.connect("children.db")
+                            cursor = conn.execute(f""""INSERT INTO children
+                                                      (UserName, Password, PhoneNumber, Email, Teacher, Class, BirthDate, AccountType, Country, State, Church, Zone, ParentName, Coins)
+                                                      VALUES
+                                                      ('{self.fullnames}', '{self.passwords}', '{self.phones}', '{self.emails}', null, null, {f"{self.dateEdit.date().year()}/{self.dateEdit.date().month()}/{self.dateEdit.date().day()}"}, "Outreach Account", '{self.countrsy}', '{self.anti_deep_states}', null, null, '{self.parent_names}'})""")
+                            conn.commit()
+                            cursor.close()
 
 
 app = QApplication(sys.argv)
@@ -877,7 +892,7 @@ window2.addWidget(window6)
 window2.addWidget(window7)
 window2.addWidget(window8)
 window2.setWindowTitle("The LoveWorld Children Curriculum App")
-window2.setMaximumSize(357, 599)
+#window2.setMaximumSize(357, 599)
 window2.setMinimumSize(357, 599)
 window2.show()
 app.exec_()
