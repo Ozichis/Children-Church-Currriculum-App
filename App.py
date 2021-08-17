@@ -509,9 +509,7 @@ class ChildPage(QDialog):
 
 
     def openchild2(self):
-        wins = ChildPage2()
-        window2.addWidget(wins)
-        window2.setCurrentIndex(window2.currentIndex()+1)
+        window2.setCurrentIndex(3)
 
     def welcomeuser(self, name, password, phone, email, teacher, classe, birth_date, acc_type, country, state, church, zone):
         winster = WelcomeUser(name, password, phone, email, teacher, classe, birth_date, acc_type, country, state, church, zone)
